@@ -1,0 +1,26 @@
+{:source-paths
+ ["src/cljs"]
+
+ :dependencies [
+		[org.clojure/core.match "1.0.0"]
+ ]
+
+ :builds
+ {
+	 :frontend {:target :browser
+             :output-dir "public/fe/js"
+             :modules
+						 {:main {:init-fn fe.core/init}}}
+						
+ 	  :node {:target :node-library
+				:exports {:core-match node.core/core-match
+									:randomSeq node.core/randomSeq
+                  :hello node.core/hello
+                  :bye node.core/bye
+                  :node-core node.core/node-core}
+        :compiler-options {:optimizations :simple}
+				:output-to "public/node/cljs.js"
+				; :output-dir "public/node/js"
+        :main node.core/main!
+        :devtools {:after-load node.core/reload!}}}}
+
